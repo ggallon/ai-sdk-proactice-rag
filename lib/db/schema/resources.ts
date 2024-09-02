@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import { text, varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
 import { createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -11,12 +10,8 @@ export const resources = pgTable("resources", {
     .$defaultFn(() => nanoid()),
   content: text("content").notNull(),
 
-  createdAt: timestamp("created_at")
-    .notNull()
-    .default(sql`now()`),
-  updatedAt: timestamp("updated_at")
-    .notNull()
-    .default(sql`now()`),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 // Schema for resources - used to validate API requests
