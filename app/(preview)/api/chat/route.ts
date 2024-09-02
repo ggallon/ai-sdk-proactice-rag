@@ -1,8 +1,15 @@
 import { createResource } from "@/lib/actions/resources";
 import { findRelevantContent } from "@/lib/ai/embedding";
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI } from "@ai-sdk/openai";
 import { convertToCoreMessages, generateObject, streamText, tool } from "ai";
 import { z } from "zod";
+import { env } from "@/lib/env.mjs";
+
+const openai = createOpenAI({
+  // custom settings
+  project: env.OPENAI_API_PROJECT,
+  compatibility: "strict", // strict mode, enable when using the OpenAI API
+});
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
