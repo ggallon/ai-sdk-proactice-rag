@@ -1,6 +1,6 @@
-import { text, varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createSelectSchema } from "drizzle-zod";
-import { z } from "zod";
+import type { z } from "zod";
 
 import { nanoid } from "@/lib/utils";
 

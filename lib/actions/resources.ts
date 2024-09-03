@@ -1,7 +1,7 @@
 "use server";
 
 import {
-  NewResourceParams,
+  type NewResourceParams,
   insertResourceSchema,
   resources,
 } from "@/lib/db/schema/resources";

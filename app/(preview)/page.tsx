@@ -1,15 +1,15 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Message } from "ai";
-import { useChat } from "ai/react";
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import ReactMarkdown, { Options } from "react-markdown";
-import React from "react";
-import ProjectOverview from "@/components/project-overview";
 import { LoadingIcon } from "@/components/icons";
+import ProjectOverview from "@/components/project-overview";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import type { Message } from "ai";
+import { useChat } from "ai/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import React from "react";
+import ReactMarkdown, { type Options } from "react-markdown";
 import { toast } from "sonner";
 
 export default function Chat() {
@@ -35,9 +35,8 @@ export default function Chat() {
     const tools = messages?.slice(-1)[0]?.toolInvocations;
     if (tools && toolCall === tools[0].toolName) {
       return tools[0].toolName;
-    } else {
-      return undefined;
     }
+    return undefined;
   }, [toolCall, messages]);
 
   const awaitingResponse = useMemo(() => {
@@ -47,9 +46,8 @@ export default function Chat() {
       messages.slice(-1)[0].role === "user"
     ) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }, [isLoading, currentToolCall, messages]);
 
   const userQuery: Message | undefined = messages
@@ -63,8 +61,8 @@ export default function Chat() {
   return (
     <div className="flex justify-center items-start sm:pt-16 min-h-screen w-full dark:bg-neutral-900 px-4 md:px-0 py-4">
       <div className="flex flex-col items-center w-full max-w-[500px]">
-      <ProjectOverview />
-      <motion.div
+        <ProjectOverview />
+        <motion.div
           animate={{
             minHeight: isExpanded ? 200 : 0,
             padding: isExpanded ? 12 : 0,
@@ -83,7 +81,7 @@ export default function Chat() {
           <div className="flex flex-col w-full justify-between gap-2">
             <form onSubmit={handleSubmit} className="flex space-x-2">
               <Input
-                className={`bg-neutral-100 text-base w-full text-neutral-700 dark:bg-neutral-700 dark:placeholder:text-neutral-400 dark:text-neutral-300`}
+                className="bg-neutral-100 text-base w-full text-neutral-700 dark:bg-neutral-700 dark:placeholder:text-neutral-400 dark:text-neutral-300"
                 minLength={3}
                 required
                 value={input}
@@ -135,9 +133,7 @@ const AssistantMessage = ({ message }: { message: Message | undefined }) => {
         className="whitespace-pre-wrap font-mono anti text-sm text-neutral-800 dark:text-neutral-200 overflow-hidden"
         id="markdown"
       >
-        <MemoizedReactMarkdown
-          className={"max-h-72 overflow-y-scroll no-scrollbar-gutter"}
-        >
+        <MemoizedReactMarkdown className="max-h-72 overflow-y-scroll no-scrollbar-gutter">
           {message.content}
         </MemoizedReactMarkdown>
       </motion.div>

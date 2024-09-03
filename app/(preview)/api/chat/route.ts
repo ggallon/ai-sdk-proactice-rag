@@ -1,9 +1,9 @@
 import { createResource } from "@/lib/actions/resources";
 import { findRelevantContent } from "@/lib/ai/embedding";
+import { env } from "@/lib/env.mjs";
 import { createOpenAI } from "@ai-sdk/openai";
 import { convertToCoreMessages, generateObject, streamText, tool } from "ai";
 import { z } from "zod";
-import { env } from "@/lib/env.mjs";
 
 const openai = createOpenAI({
   // custom settings
@@ -46,7 +46,8 @@ export async function POST(req: Request) {
         execute: async ({ content }) => createResource({ content }),
       }),
       getInformation: tool({
-        description: `get information from your knowledge base to answer questions.`,
+        description:
+          "get information from your knowledge base to answer questions.",
         parameters: z.object({
           question: z.string().describe("the users question"),
           similarQuestions: z.array(z.string()).describe("keywords to search"),
@@ -65,7 +66,8 @@ export async function POST(req: Request) {
         },
       }),
       understandQuery: tool({
-        description: `understand the users query. use this tool on every prompt.`,
+        description:
+          "understand the users query. use this tool on every prompt.",
         parameters: z.object({
           query: z.string().describe("the users query"),
           toolsToCallInOrder: z
