@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["DATABASE_URL"],
+  "tasks": {
+    "build": {
+      "env": ["OPENAI_API_KEY", "OPENAI_API_PROJECT"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "format": {},
+    "check-types": {},
+    "db:generate": {
+      "inputs": ["./lib/db/schema/*.ts"],
+      "outputs": ["./lib/db/migrations/**/*.{json,sql}"]
+    },
+    "db:migrate": {
+      "dependsOn": ["db:generate"],
+      "inputs": ["./lib/db/migrations/**/*.{json,sql}"],
+      "cache": false
+    }
+  }
+}
