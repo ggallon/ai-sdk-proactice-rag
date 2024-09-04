@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "dotenv -- tsx lib/db/migrate.ts && next build",
+    "build": "dotenv -- next build",
     "start": "next start",
     "clean": "turbo clean && rm -rf node_modules",
     "lint": "turbo biome lint ./",
