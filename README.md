@@ -35,12 +35,12 @@ To get the project up and running, follow these steps:
 4. Migrate the database schema:
 
    ```bash
-   pnpm db:migrate
+   pnpm turbo db:migrate
    ```
 
 5. Start the development server:
    ```bash
-   pnpm dev
+   pnpm turbo dev
    ```
 
 Your project should now be running on [http://localhost:3000](http://localhost:3000).
