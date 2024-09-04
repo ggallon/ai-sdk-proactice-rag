@@ -23,6 +23,8 @@ const runMigrate = async () => {
 
   console.log("✅ Migrations completed in", end - start, "ms");
 
+  await connection.end();
+
   process.exit(0);
 };
 
