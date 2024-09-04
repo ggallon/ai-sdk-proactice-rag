@@ -1,10 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": [".env", "!.env.example", "tsconfig.json"],
-  "globalEnv": ["DATABASE_URL"],
+  "globalEnv": ["DATABASE_URL", "OPENAI_API_KEY", "OPENAI_API_PROJECT"],
   "tasks": {
     "build": {
-      "env": ["OPENAI_API_KEY", "OPENAI_API_PROJECT"],
       "dependsOn": ["db:migrate"],
       "inputs": ["$TURBO_DEFAULT$"],
       "outputs": [".next/**", "!.next/cache/**"]
