@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "dotenv -- tsx lib/db/migrate.ts && next build",
+    "build": "next build",
     "start": "next start",
     "clean": "turbo clean && rm -rf node_modules",
-    "lint": "biome lint ./",
+    "lint": "turbo biome lint ./",
     "format": "biome format --write ./",
     "check-types": "tsc --noEmit",
     "db:generate": "dotenv -- drizzle-kit generate",
