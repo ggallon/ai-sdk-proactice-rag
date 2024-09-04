@@ -1,4 +1,4 @@
-import { env } from "@/lib/env.mjs";
+import { envDB } from "@/lib/env.mjs";
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
@@ -6,6 +6,6 @@ export default defineConfig({
   out: "./lib/db/migrations",
   dialect: "postgresql",
   dbCredentials: {
-    url: env.DATABASE_URL,
+    url: envDB.DATABASE_URL,
   },
 });
