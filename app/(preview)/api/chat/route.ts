@@ -1,15 +1,8 @@
 import { createResource } from "@/lib/actions/resources";
 import { findRelevantContent } from "@/lib/ai/embedding";
-import { env } from "@/lib/env.mjs";
-import { createOpenAI } from "@ai-sdk/openai";
 import { convertToCoreMessages, generateObject, streamText, tool } from "ai";
 import { z } from "zod";
-
-const openai = createOpenAI({
-  // custom settings
-  project: env.OPENAI_API_PROJECT,
-  compatibility: "strict", // strict mode, enable when using the OpenAI API
-});
+import { registry } from "@/lib/ai/registry";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -18,7 +11,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = await streamText({
-    model: openai("gpt-4o"),
+    model: registry.languageModel("openai:gpt-4o"),
     messages: convertToCoreMessages(messages),
     system: `You are a helpful assistant acting as the users' second brain.
     Use tools on every request.
@@ -78,7 +71,7 @@ export async function POST(req: Request) {
         }),
         execute: async ({ query }) => {
           const { object } = await generateObject({
-            model: openai("gpt-4o"),
+            model: registry.languageModel("openai:gpt-4o"),
             system:
               "You are a query understanding assistant. Analyze the user query and generate similar questions.",
             schema: z.object({

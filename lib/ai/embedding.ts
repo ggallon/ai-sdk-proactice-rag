@@ -1,10 +1,8 @@
-import { openai } from "@ai-sdk/openai";
 import { embed, embedMany } from "ai";
 import { cosineDistance, desc, gt, sql } from "drizzle-orm";
 import { db } from "../db";
 import { embeddings } from "../db/schema/embeddings";
-
-const embeddingModel = openai.embedding("text-embedding-ada-002");
+import { registry } from "./registry";
 
 const generateChunks = (input: string): string[] => {
   return input
@@ -18,7 +16,7 @@ export const generateEmbeddings = async (
 ): Promise<Array<{ embedding: number[]; content: string }>> => {
   const chunks = generateChunks(value);
   const { embeddings } = await embedMany({
-    model: embeddingModel,
+    model: registry.textEmbeddingModel("openai:text-embedding-ada-002"),
     values: chunks,
   });
   return embeddings.map((e, i) => ({ content: chunks[i], embedding: e }));
@@ -27,7 +25,7 @@ export const generateEmbeddings = async (
 export const generateEmbedding = async (value: string): Promise<number[]> => {
   const input = value.replaceAll("\n", " ");
   const { embedding } = await embed({
-    model: embeddingModel,
+    model: registry.textEmbeddingModel("openai:text-embedding-ada-002"),
     value: input,
   });
   return embedding;
