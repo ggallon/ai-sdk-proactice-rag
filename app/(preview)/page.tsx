@@ -16,12 +16,19 @@ export default function Chat() {
   const [toolCall, setToolCall] = useState<string>();
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
-      maxToolRoundtrips: 4,
+      maxToolRoundtrips: 6,
       onToolCall({ toolCall }) {
+        console.log("onToolCall::toolCall: ", toolCall);
         setToolCall(toolCall.toolName);
       },
       onError: (error) => {
+        console.log("onError::error: ", error);
         toast.error("You've been rate limited, please try again later!");
+      },
+      onFinish: (message, { usage, finishReason }) => {
+        console.log("onFinish::message: ", message);
+        console.log("onFinish::usage: ", usage);
+        console.log("onFinish::finishReason: ", finishReason);
       },
     });
 
