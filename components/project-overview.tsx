@@ -36,17 +36,6 @@ const ProjectOverview = () => {
           generation (RAG) capabilities. Data is stored as vector embeddings
           using DrizzleORM and PostgreSQL.
         </p>
-        <p>
-          Learn how to build this project by following this{" "}
-          <Link
-            className="text-blue-500"
-            href="https://sdk.vercel.ai/docs/guides/rag-chatbot"
-            target="_blank"
-          >
-            guide
-          </Link>
-          .
-        </p>
       </div>
     </motion.div>
   );
