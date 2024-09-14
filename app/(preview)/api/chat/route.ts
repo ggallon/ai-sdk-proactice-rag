@@ -27,7 +27,6 @@ export async function POST(req: Request) {
     If you are unsure, use the getInformation tool and you can use common sense to reason based on the information you do have.
     Use your abilities as a reasoning machine to answer questions based on the information you do have.
 `,
-    toolChoice: "required",
     tools: {
       addResource: tool({
         description: `add a resource to your knowledge base.
