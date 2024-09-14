@@ -16,7 +16,7 @@ export default function Chat() {
   const [toolCall, setToolCall] = useState<string>();
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
-      maxToolRoundtrips: 6,
+      maxSteps: 6,
       onToolCall({ toolCall }) {
         console.log("onToolCall::toolCall: ", toolCall);
         setToolCall(toolCall.toolName);
