@@ -3,7 +3,7 @@
 import { LoadingIcon } from "@/components/icons";
 import ProjectOverview from "@/components/project-overview";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import type { Message } from "ai";
 import { useChat } from "ai/react";
 import { AnimatePresence, motion } from "framer-motion";
