@@ -14,7 +14,7 @@
     "db:migrate": "dotenv -- drizzle-kit migrate",
     "db:push": "dotenv -- drizzle-kit push",
     "db:studio": "dotenv -- drizzle-kit studio",
-    "update-deps": "pnpm update --interactive --latest -r"
+    "update-deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
     "@ai-sdk/openai": "0.0.60",
