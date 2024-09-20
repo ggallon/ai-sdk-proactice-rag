@@ -11,6 +11,13 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = await streamText({
+    experimental_telemetry: {
+      isEnabled: true,
+      functionId: "rag-master",
+      metadata: {
+        environment: process.env.NODE_ENV,
+      },
+    },
     model: registry.languageModel("openai:gpt-4o"),
     messages: convertToCoreMessages(messages),
     system: `You are a helpful assistant acting as the users' second brain.
@@ -71,6 +78,13 @@ export async function POST(req: Request) {
         }),
         execute: async ({ query }) => {
           const { object } = await generateObject({
+            experimental_telemetry: {
+              isEnabled: true,
+              functionId: "rag-tool-understand-query",
+              metadata: {
+                environment: process.env.NODE_ENV,
+              },
+            },
             model: registry.languageModel("openai:gpt-4o"),
             system:
               "You are a query understanding assistant. Analyze the user query and generate similar questions.",
